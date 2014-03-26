@@ -1,0 +1,25 @@
+Varnish under Valgrind
+======================
+
+This git repository contains bits and pieces needed to
+do simple Valgrind runs of Varnish.
+
+Dependencies are valgrind, varnish, wrk and cacheabledata.git.
+
+* apt-get install valgrind
+* git://git.varnish-cache.org/varnish-cache
+* https://github.com/wg/wrk
+* https://github.com/lkarsten/cacheabledata
+
+
+Steps to do a run
+-----------------
+
+Start varnishd in foreground mode under valgrind:
+
+$ ./run-under-valgrind ./start-varnishd-fg
+
+(apply some load in another terminal.)
+Ctrl+C to let varnishd finish up and shut down.
+Output files are in var/
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+PATH=/opt/varnish/bin:$PATH
+
+varnishstat -n /tmp/foo -1 | grep n_obj
+
+wrk -d 30s -c 30 -t 10 -s wrkscripts/medialibrary1.lua  http://localhost:6081/
+
+varnishstat -n /tmp/foo -1 | grep n_obj
+varnishadm  -n /tmp/foo ban 'obj.http.url ~ cacheabledata'
+
+varnishstat -n /tmp/foo -1 | grep n_obj
+sleep 2
+varnishstat -n /tmp/foo -1 | grep n_obj

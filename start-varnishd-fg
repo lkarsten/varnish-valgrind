@@ -1,0 +1,5 @@
+#!/bin/bash
+VARNISHD=../varnish-cache/bin/varnishd/varnishd
+
+$VARNISHD -a :6081 -p default_ttl=600 -p ban_lurker_age=1 -f default4.vcl -smalloc,500M -F -n /tmp/foo
+
